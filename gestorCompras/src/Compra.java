@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -27,7 +28,7 @@ public class Compra {
             this.date = setDate(date);
         } catch (Exception ex) {
             System.out.println("Creation failure");
-            throw ex;     
+            throw ex;
         }
         this.dir = dir;
         //TODO check the lenght of both lists
@@ -42,7 +43,7 @@ public class Compra {
             this.date = setDate(date);
         } catch (Exception ex) {
             System.out.println("Creation failure");
-            throw ex; 
+            throw ex;
         }
         this.dir = dir;
         this.cart = new ArrayList();
@@ -127,4 +128,47 @@ public class Compra {
         this.pCart = pCart;
     }
 
+    public void anyadeProducto(String product, int price) {
+
+        cart.add(product);
+        pCart.add(price);
+
+    }
+
+    public boolean borrarProducto(String product) {
+
+        Iterator<Integer> i = cart.iterator();
+        int cont = 0;//Creamos un contador que nos permitira identificar la posicion
+        boolean found = false;
+
+        while (i.hasNext()) {//recoremos con iterator hasta encontrar el producto
+            if (i.equals(product)) {
+                cart.remove(cont);
+                pCart.remove(cont);
+                found = true;
+            }
+            cont++;
+        }
+        return found;
+    }
+    
+    public String productoMasCaro(ArrayList<String> cart, ArrayList<Integer> pCart){
+        
+        int max = 0;
+        String product = "";
+        
+        for (int i = 0; i < cart.size(); i++) {
+            
+            if(max < pCart.get(i)){
+                product = cart.get(i);
+                max = pCart.get(i);
+            }
+        }  
+        return product + (" " + max);
+    }
+
+    //TODO complete method
+    /*public String[] productosMasBaratosQue(){
+        
+    }*/
 }
