@@ -17,8 +17,8 @@ public class Compra {
     private String nombre;
     private String dir;
     private int[] date;//formato dia/mes/anyo
-    private ArrayList cart;
-    private ArrayList pCart;
+    private ArrayList<String> cart;
+    private ArrayList<Integer> pCart;
 
     public Compra(String nombre, String dir, String date, ArrayList cart, ArrayList pCart) throws Exception {
 
@@ -137,7 +137,7 @@ public class Compra {
 
     public boolean borrarProducto(String product) {
 
-        Iterator<Integer> i = cart.iterator();
+        Iterator<String> i = cart.iterator();
         int cont = 0;//Creamos un contador que nos permitira identificar la posicion
         boolean found = false;
 
@@ -152,7 +152,7 @@ public class Compra {
         return found;
     }
     
-    public String productoMasCaro(ArrayList<String> cart, ArrayList<Integer> pCart){
+    public String productoMasCaro(){
         
         int max = 0;
         String product = "";
@@ -167,8 +167,18 @@ public class Compra {
         return product + (" " + max);
     }
 
-    //TODO complete method
-    /*public String[] productosMasBaratosQue(){
+    public ArrayList productosMasBaratosQue(int price){
         
-    }*/
+        String product = "";
+        ArrayList res = new ArrayList();
+        
+        for (int i = 0; i < cart.size(); i++) {
+            
+            if(price > pCart.get(i)){
+                product = cart.get(i)+" "+ pCart.get(i);
+                res.add(product);
+            }
+        }
+       return res;
+    }
 }
